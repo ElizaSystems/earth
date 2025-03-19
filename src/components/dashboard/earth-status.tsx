@@ -232,9 +232,19 @@ ${data.geomagneticStorms.polarActivity ? '🌈 Aurora activity likely' : '✅ No
     <div className="w-full h-full">
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col gap-2 p-2">
+
+
+      <div className="p-2 h-[500px]">
+          <div className="border bg-card text-card-foreground shadow-sm w-full items-center justify-between rounded-lg bg-clip-border border-zinc-800">
+            <div className="card-body p-2">
+              <h2 className="card-title text-xs">Earth Monitoring Network</h2>
+              <EarthGlobe data={earthData} />
+            </div>
+          </div>
+        </div>
         {/* Status Bars */}
         <div className="p-2">
-          <div className="card bg-base-200 shadow-xl mb-2">
+          <div className="border bg-card text-card-foreground shadow-sm w-full items-center justify-between rounded-lg bg-clip-border border-zinc-800">
             <div className="card-body p-2">
               <h2 className="card-title text-xs">System Status</h2>
               <div className="space-y-2">
@@ -296,11 +306,11 @@ ${data.geomagneticStorms.polarActivity ? '🌈 Aurora activity likely' : '✅ No
 
         {/* Accordion Menu */}
         <div className="p-2">
-          <div className="card bg-base-200 shadow-xl">
+          <div className="border bg-card text-card-foreground shadow-sm w-full items-center justify-between rounded-lg bg-clip-border border-zinc-800">
             <div className="card-body p-2">
               <div className="space-y-2">
                 {/* Existing accordion items... */}
-                <div className="collapse collapse-arrow bg-base-100">
+                <div className="collapse collapse-arrow border border-zinc-800">
                   <input type="radio" name="earth-accordion" defaultChecked /> 
                   <div className="collapse-title text-sm font-medium">
                     Schumann Resonance
@@ -329,7 +339,7 @@ ${data.geomagneticStorms.polarActivity ? '🌈 Aurora activity likely' : '✅ No
                 </div>
 
                 {/* Solar Activity Accordion */}
-                <div className="collapse collapse-arrow bg-base-100">
+                <div className="collapse collapse-arrow border border-zinc-800">
                   <input type="radio" name="earth-accordion" />
                   <div className="collapse-title text-sm font-medium">
                     Solar Activity
@@ -348,7 +358,7 @@ ${data.geomagneticStorms.polarActivity ? '🌈 Aurora activity likely' : '✅ No
                 </div>
 
                 {/* Geomagnetic Activity Accordion */}
-                <div className="collapse collapse-arrow bg-base-100">
+                <div className="collapse collapse-arrow border border-zinc-800">
                   <input type="radio" name="earth-accordion" />
                   <div className="collapse-title text-sm font-medium">
                     Geomagnetic Activity
@@ -367,7 +377,7 @@ ${data.geomagneticStorms.polarActivity ? '🌈 Aurora activity likely' : '✅ No
                 </div>
 
                 {/* Global Coherence Accordion */}
-                <div className="collapse collapse-arrow bg-base-100">
+                <div className="collapse collapse-arrow border border-zinc-800">
                   <input type="radio" name="earth-accordion" />
                   <div className="collapse-title text-sm font-medium">
                     Global Coherence
@@ -387,42 +397,12 @@ ${data.geomagneticStorms.polarActivity ? '🌈 Aurora activity likely' : '✅ No
 
         {/* Chat Section */}
         <div className="p-2 flex-1">
-          <div className="card bg-base-200 shadow-xl h-full flex flex-col">
+          <div className="border bg-card text-card-foreground shadow-sm w-full items-center justify-between rounded-lg bg-clip-border border-zinc-800">
             <div className="card-body p-2 flex-1 flex flex-col">
               <div className="flex-1 overflow-y-auto max-h-[400px]">
-                {conversation.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`chat ${msg.role === 'user' ? 'chat-end' : 'chat-start'}`}
-                  >
-                    <div className={`chat-bubble ${
-                      msg.role === 'user' ? 'chat-bubble-primary' : 'chat-bubble-secondary'
-                    }`}>
-                      <div className="flex flex-col">
-                        <span>{msg.content}</span>
-                        <span className="text-xs opacity-50 mt-1">
-                          {new Date(msg.timestamp).toLocaleTimeString()}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                <div ref={chatEndRef} />
+              <ChatBox messages={messages} />
+              <MessageInput onSend={sendMessage} />
               </div>
-              <form onSubmit={handleLocalSubmit} className="mt-2">
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Ask Earth anything..."
-                    className="input input-bordered input-sm flex-1"
-                  />
-                  <button type="submit" className="btn btn-primary btn-sm">
-                    Send
-                  </button>
-                </div>
-              </form>
             </div>
           </div>
         </div>
